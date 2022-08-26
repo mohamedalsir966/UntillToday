@@ -16,6 +16,10 @@ using Cxunicorn.Common.Middlewares.TeamsActivityHandler.Users;
 using Cxunicorn.Common.Middlewares.Logging.Logger.LoggingRepository;
 using Cxunicorn.Common.Services.Tables;
 using Cxunicorn.Common.Extensions;
+using Microsoft.Bot.Builder.Integration.AspNet.Core;
+using Microsoft.Bot.Builder;
+using MyShift.Notifications.Bot;
+using MyShift.Notifications.Helpers.Notification;
 
 [assembly: FunctionsStartup(typeof(Startup))]
 
@@ -33,15 +37,20 @@ namespace MyShift.Notifications
                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                .AddEnvironmentVariables()
                .Build();
+            //builder.Services.Configure<RepositoryOptions>(config.GetSection("repositoryOptions"));
+            //builder.Services.AddBlobClient();INotificationDataHelper
 
-            builder.Services.AddTableClient();
+            //builder.Services.AddTableClient();
 
             builder.Services.AddScoped<IService, ServiceEng>();
             builder.Services.AddScoped<ILogsRepository, LogsRepository>();
             builder.Services.AddScoped<INotificationService, NotificationService>();
-            builder.Services.AddScoped<IUsersDataRepository, UsersDataRepository>();
-            builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
-            builder.Services.AddScoped<ILoggingRepository, LoggingRepository>();
+           // builder.Services.AddScoped<IUsersDataRepository, UsersDataRepository>();
+            builder.Services.AddScoped<INotificationDataHelper, NotificationDataHelper>();
+           //builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+           // builder.Services.AddScoped<ILoggingRepository, LoggingRepository>();
+            builder.Services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
+            builder.Services.AddTransient<IBot, ProactiveBot>();
             builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("Data Source=.;Initial Catalog=NotificationDBV2;Integrated Security=True"));
 
         }

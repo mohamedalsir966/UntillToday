@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Identity.Client;
 using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using MyShift.Notifications.Entitys;
+using MyShift.Notifications.Helpers.Notification;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Persistence.Repositories;
@@ -23,59 +24,30 @@ namespace MyShift.Notifications.Service
 {
     public class ServiceEng : IService
     {
-        private readonly IConfiguration _configuration;
         private readonly ILogsRepository _logsRepository;
-        private readonly INotificationService _notificationService;
-        private readonly IUsersDataRepository _usersDataRepository;
-        public ServiceEng(IConfiguration configuration, ILogsRepository logsRepository ,INotificationService notificationService,IUsersDataRepository usersDataRepository)
+        private readonly INotificationDataHelper _notificationDataHelper;
+        public ServiceEng( ILogsRepository logsRepository , INotificationDataHelper notificationDataHelper)
         {
-            _configuration = configuration;
             _logsRepository = logsRepository;
-            _notificationService = notificationService;
-            _usersDataRepository = usersDataRepository;
+            _notificationDataHelper = notificationDataHelper;
         }
         public async Task<string> GetDataToNotifiy()
         {
             var dataTobeNotifyed = await _logsRepository.GetLogsQueries();
+
             foreach (var item in dataTobeNotifyed)
             {
-                // samble card
-                var attachment = getcard("item=>what will be in the card");
-                //get the usier to fitch the data to get the ConversationId and ServiceUrl
-                var user = await _usersDataRepository.GetConversationRefrenceAsync("item.id=>what is Upn is it the id in the Q");
-                //send the notification.
-                await _notificationService.SendAsync(user.ServiceUrl, user.ConversationId, 0, MessageFactory.Attachment(attachment));
-
-                var updateData = await _logsRepository.UpdateLogsCommand(dataTobeNotifyed);
+                //we need to get it by the user how ??
+                var conversationReference = await _logsRepository.GetConversationReference();
+                //her we just need to send it now data back??
+                var result = await _notificationDataHelper.SendNotification(conversationReference);
             }
 
+           // var updateData = await _logsRepository.UpdateLogsCommand(dataTobeNotifyed);
+           
             var queueMessage = JsonConvert.SerializeObject(dataTobeNotifyed);
             return queueMessage;
         }
-        public Attachment getcard(string shift)
-        {
-            AdaptiveCard card = new AdaptiveCard(new AdaptiveSchemaVersion(1, 0));
-
-            card.Body.Add(new AdaptiveTextBlock()
-            {
-                Text = "Proactive Hello",
-                Size = AdaptiveTextSize.ExtraLarge
-            });
-
-            card.Body.Add(new AdaptiveImage()
-            {
-                Url = new Uri("http://adaptivecards.io/content/cats/1.png")
-            });
-
-            Attachment attachment = new Attachment()
-            {
-                ContentType = AdaptiveCard.ContentType,
-                Content = card
-            };
-            return attachment;
-
-        }
-
 
     }
 }
