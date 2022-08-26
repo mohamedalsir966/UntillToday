@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\moham\\source\\repos\\UntillTodaytoday\\Persistence\\Persistence.csproj": {}
+    "C:\\Users\\moham\\source\\repos\\UntillTodayclon3\\Persistence\\Persistence.csproj": {}
   },
   "projects": {
-    "C:\\Users\\moham\\source\\repos\\UntillTodaytoday\\Domain\\Domain.csproj": {
+    "C:\\Users\\moham\\source\\repos\\UntillTodayclon3\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\moham\\source\\repos\\UntillTodaytoday\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\moham\\source\\repos\\UntillTodayclon3\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\moham\\source\\repos\\UntillTodaytoday\\Domain\\Domain.csproj",
+        "projectPath": "C:\\Users\\moham\\source\\repos\\UntillTodayclon3\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\moham\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\moham\\source\\repos\\UntillTodaytoday\\Domain\\obj\\",
+        "outputPath": "C:\\Users\\moham\\source\\repos\\UntillTodayclon3\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\moham\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -59,14 +59,14 @@
         }
       }
     },
-    "C:\\Users\\moham\\source\\repos\\UntillTodaytoday\\Persistence\\Persistence.csproj": {
+    "C:\\Users\\moham\\source\\repos\\UntillTodayclon3\\Persistence\\Persistence.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\moham\\source\\repos\\UntillTodaytoday\\Persistence\\Persistence.csproj",
+        "projectUniqueName": "C:\\Users\\moham\\source\\repos\\UntillTodayclon3\\Persistence\\Persistence.csproj",
         "projectName": "Persistence",
-        "projectPath": "C:\\Users\\moham\\source\\repos\\UntillTodaytoday\\Persistence\\Persistence.csproj",
+        "projectPath": "C:\\Users\\moham\\source\\repos\\UntillTodayclon3\\Persistence\\Persistence.csproj",
         "packagesPath": "C:\\Users\\moham\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\moham\\source\\repos\\UntillTodaytoday\\Persistence\\obj\\",
+        "outputPath": "C:\\Users\\moham\\source\\repos\\UntillTodayclon3\\Persistence\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\moham\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -83,8 +83,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\moham\\source\\repos\\UntillTodaytoday\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\moham\\source\\repos\\UntillTodaytoday\\Domain\\Domain.csproj"
+              "C:\\Users\\moham\\source\\repos\\UntillTodayclon3\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\moham\\source\\repos\\UntillTodayclon3\\Domain\\Domain.csproj"
               }
             }
           }
@@ -99,6 +99,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.Bot.Schema": {
+              "target": "Package",
+              "version": "[4.17.1, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.8, )"
